@@ -8,7 +8,7 @@ import { currentWeather, searchLocationResults, returnedForecast } from './weath
 import { DayForecastAPIResponse, CurrentWeatherAPIResult, SearchLocation, SearchLocationAPIResult, ForecastAPIResponse } from './weather.service.interface';
 const useAPI = true;
 const apiKey = "GYu7UmAVqHoXFz06MdaEHtj4Wj56zQVG"
-
+const APIURL = 'https://dataservice.accuweather.com'
 
 @Injectable({ providedIn: 'root' })
 export class WeatherService {
@@ -16,10 +16,9 @@ export class WeatherService {
 
   getForecasts(cityKey: string): Observable<WeatherInfo[]> {
     if (useAPI) {
-      const apiResult = this.http.get<ForecastAPIResponse>(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}&metric=true`)
+      const apiResult = this.http.get<ForecastAPIResponse>(`${APIURL}/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}&metric=true`)
         .pipe(
           map((value: ForecastAPIResponse) => {
-            console.log(value);
             let result = value.DailyForecasts.map((dayForecast: DayForecastAPIResponse) => {
               const { Day } = dayForecast;
               const iconString: string = Day.Icon < 10 ? `0${Day.Icon}` : `${Day.Icon}`;
@@ -52,11 +51,9 @@ export class WeatherService {
   getCurrentWeather(cityKey: string, cityName: string): Observable<CityWeather> {
 
     if (useAPI) {
-      const apiResult = this.http.get<CurrentWeatherAPIResult[]>(`http://dataservice.accuweather.com/currentconditions/v1/${cityKey}?apikey=${apiKey}`)
+      const apiResult = this.http.get<CurrentWeatherAPIResult[]>(`${APIURL}/currentconditions/v1/${cityKey}?apikey=${apiKey}`)
         .pipe(
           map((value: CurrentWeatherAPIResult[]) => {
-            console.log(value);
-
             const icon = value[0].WeatherIcon;
             const iconString: string = icon < 10 ? `0${icon}` : `${icon}`;
             const weatherInfo: WeatherInfo = {
@@ -98,9 +95,8 @@ export class WeatherService {
 
   getSearchLocation(query: string): Observable<SearchLocation[]> {
     if (useAPI) {
-      return this.http.get<SearchLocationAPIResult[]>(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`)
+      return this.http.get<SearchLocationAPIResult[]>(`${APIURL}/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`)
         .pipe(map((value: SearchLocationAPIResult[]): SearchLocation[] => {
-          console.log(value);
           return value.map((value) => { return { Key: value.Key, LocalizedName: value.LocalizedName }; })
         }));
     }

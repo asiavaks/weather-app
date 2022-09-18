@@ -57,7 +57,6 @@ export class WeatherPageComponent implements OnInit {
     this.subscriptions.push(this.weatherService.getSearchLocation(query).subscribe((locations) => {
       this.locations = locations;
       this.filteredOptions = this._filter(query || '');
-      console.log(this.locations);
     }))
   }
   private _filter(value: string): SearchLocation[] {
