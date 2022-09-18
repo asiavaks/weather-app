@@ -1,0 +1,49 @@
+.favorites-page{
+    display: flex;
+    justify-content: center;
+
+.weather-forecast{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+
+    .weather-forecast-info{
+      cursor: pointer;
+        
+    }
+
+    border-radius: 25px;
+    height: 500px;
+
+    .forecast-title{
+      font-size: 45px;
+      height: 100px;
+      padding: 30px;
+      padding-bottom: 0px;
+    }
+
+    
+    .temperature{
+        font-size: 60px;
+      }
+  
+    .name{
+        font-size: 40px;
+      }
+
+    .description{
+      font-size: 30px; 
+    }
+
+    .weather-forecast-info{
+      padding: 10px;
+      background-color: #3f6faf6e;
+      border-radius: 30px;
+      margin: 10px;
+    }
+  }
+}

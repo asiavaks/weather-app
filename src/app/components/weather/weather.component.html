@@ -1,0 +1,27 @@
+<div class="weather-component">
+  <div class="city-weather-info">
+    <div class="city-weather">
+      <h1 class="city-weather-title name">{{(cityWeather | async)?.name}}</h1>
+      <h1 class="city-weather-title temperature">{{(cityWeather | async)?.weatherInfo?.temperature}}&deg;c</h1>
+      <h1 class="city-weather-title description">{{(cityWeather | async)?.weatherInfo?.description}}</h1>
+      <img [src]="(cityWeather | async)?.weatherInfo?.iconURL">
+    </div>
+    <div class="favorite-info">
+      <h1 class="city-weather-title description favorite-description">Add to Favorite</h1>
+
+      <button (click)="onFavoriteClick()" mat-icon-button class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon">
+        <mat-icon [ngClass]="{'isFavorite': (cityWeather | async)?.isFavorite}" class="favorite-icon">favorite
+        </mat-icon>
+      </button>
+      <h1></h1>
+    </div>
+  </div>
+  <div class="weather-forecast">
+    <div class="weather-forecast-info" *ngFor="let weatherInfo of (cityWeather | async)?.weatherForecast">
+      <div class="forecast-title name">{{weatherInfo.date | date:'EEEE'}}</div>
+      <div class="forecast-title temperature">{{weatherInfo.temperature}}&deg;c</div>
+      <img [src]="weatherInfo.iconURL">
+    </div>
+  </div>
+</div>

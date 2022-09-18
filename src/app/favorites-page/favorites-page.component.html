@@ -1,0 +1,10 @@
+<div class="favorites-page">
+    <div class="weather-forecast">
+      <div class="weather-forecast-info" *ngFor="let favoriteWeather of (selectFavorites$ | async)" (click)="onSelectCityWeather(favoriteWeather)">
+        <div class="forecast-title name">{{favoriteWeather.name}}</div>
+        <div class="forecast-title temperature">{{favoriteWeather.weatherInfo.temperature}}&deg;c</div>
+        <div class="forecast-title description">{{favoriteWeather.weatherInfo.description}}</div>
+        <img [src]="favoriteWeather.weatherInfo.iconURL">
+      </div>
+    </div>
+</div>

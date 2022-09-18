@@ -1,0 +1,21 @@
+ <div class="weather-page">
+   <div class="weather-input">
+     <form class="example-form">
+       <mat-form-field class="example-full-width" appearance="fill">
+         <div class="search-input">
+           <mat-icon aria-hidden="false" aria-label="Example search icon" fontIcon="search" class="search-icon">
+           </mat-icon>
+           <input type="text" placeholder="Tel Aviv" aria-label="City" matInput (ngModelChange)="inputChange($event)"
+             [formControl]="myControl" [matAutocomplete]="auto">
+         </div>
+         <mat-autocomplete #auto="matAutocomplete">
+           <mat-option *ngFor="let option of filteredOptions " [value]="option.LocalizedName"
+             (onSelectionChange)="locationClick(option)">{{option.LocalizedName}}
+           </mat-option>
+         </mat-autocomplete>
+       </mat-form-field>
+     </form>
+   </div>
+   <app-weather class="weather-component-input" [cityWeather]="currentWeather$" (onFavorite)="onFavorite($event)">
+   </app-weather>
+ </div>
